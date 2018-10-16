@@ -7,33 +7,45 @@ public class Main{
 		for(int i=0;i<t;i++)
 		{
 			int n=in.nextInt();
-			int[] arr=new int[n+1];
-			for(int j=2;j<=(n+1)/2;j++)
+			ArrayList<Integer> al=new ArrayList<>();
+			for(int j=2;j<=n;j++)
 			{
+				
+				int count=0;
 				int k=2;
-				if(arr[j]==0)
-    				while(k*j<=n)
-    				{
-    					arr[k]++;
-    					k++;
-    				}	
-			}
-			int flag=0;
-			for(int j=2;j<=(n+1)/2;j++)
-			{
-			    System.out.println("rr "+arr[j]+" "+arr[n-j]);
-				if(arr[j]==2)
+				int j2=j;
+                int prev=0;
+				while(j2>1 && count<2 )
 				{
-					if(arr[n-j]==2){
-						System.out.println("YES");
-						flag=1;
-						break;
+                    
+					if(j2%k==0){
+						
+                        if(k==prev)
+                            break;
+                        j2=j2/k;
+						count++;    
+                        prev=k;
 					}
+					else
+						k++;
+					
+				}
+				if(j2==1 && count==2)
+				{
+					al.add(j);
 				}
 			}
-			
+			int flag=0;
+			for(int k=0;k<al.size();k++)
+			{
+				if(al.contains(n-al.get(k))){
+				   System.out.println("YES");
+					flag=1;
+					break;
+				}
+			}
 			if(flag==0)
-				System.out.println("NO"); 
+				   System.out.println("NO");
 		}
 	}
 }
